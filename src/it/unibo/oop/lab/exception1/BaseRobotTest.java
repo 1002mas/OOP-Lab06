@@ -37,10 +37,10 @@ public final class BaseRobotTest {
 	try {
 	    for (int i = 0; i < RobotEnvironment.WORLD_X_UPPER_LIMIT; i++) {
 		// check if position if coherent
-		assertNotNull("[CHECKING MOVING RIGHT]", r1.moveRight());
+		assertTrue("[CHECKING MOVING RIGHT]", r1.moveRight());
 	    }
 	    // reached the right limit of the world
-	    assertFalse("[CHECKING MOVING RIGHT]", r1.moveRight());
+	    assertTrue("[CHECKING MOVING RIGHT]", r1.moveRight());
 	    // checking positions x=50; y=0
 	    assertEquals("[MOVING RIGHT ROBOT POS X]", RobotEnvironment.WORLD_X_UPPER_LIMIT,
 		    r1.getEnvironment().getCurrPosX());
@@ -53,7 +53,7 @@ public final class BaseRobotTest {
 		assertTrue("[CHECKING MOVING UP]", r1.moveUp());
 	    }
 	    // reached the upper limit of the world
-	    assertFalse("[CHECKING MOVING UP]", r1.moveUp());
+	    assertTrue("[CHECKING MOVING UP]", r1.moveUp());
 	    // checking positions x=50; y=80
 	    assertEquals("[MOVING RIGHT ROBOT POS X]", RobotEnvironment.WORLD_X_UPPER_LIMIT,
 		    r1.getEnvironment().getCurrPosX());
@@ -61,8 +61,8 @@ public final class BaseRobotTest {
 		    r1.getEnvironment().getCurrPosY());
 	    fail();
 	} catch (PositionOutOfBoundException e) {
-	    assertNotNull(e);
-	    e.printStackTrace();
+	    assertNotNull(e.getMessage());
+	    assertFalse(e.getMessage().isEmpty());
 	}
     }
 
