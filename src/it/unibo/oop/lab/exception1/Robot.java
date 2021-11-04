@@ -85,7 +85,6 @@ public class Robot {
 	    this.environment.move(newX, newY);
 	    this.consumeBatteryForMovement();
 	    this.log("Moved to position(" + newX + "," + newY + ").");
-	    returnValue = false;
 	} else {
 	    this.log("Can not move to position(" + newX + "," + newY + "). Not enough battery.");
 	    returnValue = false;
