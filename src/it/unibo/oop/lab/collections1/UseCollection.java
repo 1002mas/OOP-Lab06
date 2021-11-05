@@ -86,7 +86,7 @@ public final class UseCollection {
 	// insertion performance testing
 	long timeA = System.nanoTime();
 	for (int i = 0; i < 100000; i++) {
-	    array.add(i);
+	    array.add(0, i);
 	}
 	timeA = System.nanoTime() - timeA;
 
@@ -103,14 +103,14 @@ public final class UseCollection {
 	System.out.println("Reading");
 	int position = array.size() / 2;
 	long readTimeA = System.nanoTime();
-	for (int i = 0; i < 100000; i++) {
+	for (int i = 0; i < 1000; i++) {
 	    array.get(position);
 	}
 	readTimeA = System.nanoTime() - readTimeA;
 
 	position = linkedArray.size() / 2;
 	long readTimeB = System.nanoTime();
-	for (int i = 0; i < 100000; i++) {
+	for (int i = 0; i < 1000; i++) {
 	    linkedArray.get(position);
 	}
 	readTimeB = System.nanoTime() - readTimeB;
