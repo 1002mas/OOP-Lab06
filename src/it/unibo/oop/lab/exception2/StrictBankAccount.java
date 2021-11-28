@@ -29,8 +29,7 @@ public class StrictBankAccount implements BankAccount {
     }
 
     /**
-     * 
-     * {@inheritDoc}
+     * @throws WrongAccountHolderException {@inheritDoc}
      */
     public void deposit(final int usrID, final double amount) {
         if (checkUser(usrID)) {
@@ -42,8 +41,8 @@ public class StrictBankAccount implements BankAccount {
     }
 
     /**
-     * 
-     * {@inheritDoc}
+     * @throws NotEnoughFoundsException
+     * @throws WrongAccountHolderException {@inheritDoc}
      */
     public void withdraw(final int usrID, final double amount) {
         if (checkUser(usrID)) {
@@ -59,8 +58,8 @@ public class StrictBankAccount implements BankAccount {
     }
 
     /**
-     * 
-     * {@inheritDoc}
+     * @throws WrongAccountHolderException
+     * @throws TransactionsOverQuotaException {@inheritDoc}
      */
     public void depositFromATM(final int usrID, final double amount) {
         if (totalTransactionCount < maximumAllowedATMTransactions) {
@@ -72,8 +71,9 @@ public class StrictBankAccount implements BankAccount {
     }
 
     /**
-     * 
-     * {@inheritDoc}
+     * @throws WrongAccountHolderException
+     * @throws NotEnoughFoundsException
+     * @throws TransactionsOverQuotaException {@inheritDoc}
      */
     public void withdrawFromATM(final int usrID, final double amount) {
         if (totalTransactionCount < maximumAllowedATMTransactions) {
