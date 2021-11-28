@@ -2,10 +2,13 @@ package it.unibo.oop.lab.collections2;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * 
@@ -32,7 +35,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * 
      * think of what type of keys and values would best suit the requirements
      */
-    final private Map<String, ArrayList<U>> friends;
+    final private Map<String, Set<U>> friends;
     /*
      * [CONSTRUCTORS]
      * 
@@ -54,8 +57,8 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      *                application
      */
     public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
-	super(name, surname, user, userAge);
-	friends = new HashMap<>();
+        super(name, surname, user, userAge);
+        friends = new HashMap<>();
     }
 
     /*
@@ -66,37 +69,29 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
 
     @Override
     public boolean addFollowedUser(final String circle, final U user) {
-	boolean returnValue = true;
-	if (friends.containsKey(circle)) {
-	    ArrayList<U> friendList = friends.get(circle);
-	    if (!friendList.contains(user)) {
-		friendList.add(user);
-	    } else {
-		returnValue = false;
-	    }
-	} else {
-	    ArrayList<U> friendList = new ArrayList<>();
-	    friendList.add(user);
-	    friends.put(circle, friendList);
-	}
-	return returnValue;
+        Set<U> circleFriends = friends.get(circle);
+        if (friends.get(circle) == null) {
+            circleFriends = new HashSet<>();
+            friends.put(circle, circleFriends);
+        }
+        return circleFriends.add(user);
     }
 
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-	if (!friends.containsKey(groupName)) {
-	    return new ArrayList<>();
-	}
-	return (Collection<U>) new ArrayList<>(friends.get(groupName));
+        if (!friends.containsKey(groupName)) {
+            return Collections.emptyList();
+        }
+        return (Collection<U>) new ArrayList<>(friends.get(groupName));
     }
 
     @Override
     public List<U> getFollowedUsers() {
-	ArrayList<U> allFriends = new ArrayList<>();
-	for (Entry<String, ArrayList<U>> group : friends.entrySet()) {
-	    allFriends.addAll(group.getValue());
-	}
-	return allFriends;
+        Set<U> allFriends = new HashSet<>();
+        for (Entry<String, Set<U>> group : friends.entrySet()) {
+            allFriends.addAll(group.getValue());
+        }
+        return new ArrayList<>(allFriends);
     }
 
 }
