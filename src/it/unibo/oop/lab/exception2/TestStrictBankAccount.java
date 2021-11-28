@@ -28,23 +28,26 @@ public final class TestStrictBankAccount {
 	StrictBankAccount usr1 = new StrictBankAccount(1, 10000, 10);
 	StrictBankAccount usr2 = new StrictBankAccount(2, 10000, 10);
 	try {
+	    //WrongAccountHolderException
 	    usr1.deposit(5, 1000);
+	    //TransactionsOverQuotaException
 	    for (int i = 0; i < 100; i++) {
 		usr2.withdrawFromATM(2, 1);
 	    }
+	    //NotEnoughFoundsException
 	    usr1.withdraw(1, 50000);
 	} catch (WrongAccountHolderException e) {
 	    assertNotNull(e.getMessage());
 	    assertFalse(e.getMessage().isEmpty());
-	    e.printStackTrace();
+//	    e.printStackTrace();
 	} catch (TransactionsOverQuotaException e1) {
 	    assertNotNull(e1.getMessage());
 	    assertFalse(e1.getMessage().isEmpty());
-	    e1.printStackTrace();
+//	    e1.printStackTrace();
 	} catch (NotEnoughFoundsException e2) {
 	    assertNotNull(e2.getMessage());
 	    assertFalse(e2.getMessage().isEmpty());
-	    e2.printStackTrace();
+//	    e2.printStackTrace();
 
 	}
     }

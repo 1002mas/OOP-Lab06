@@ -1,7 +1,6 @@
 package it.unibo.oop.lab.exception2;
 
-//state "holder" not corresponding to the account holder 
-public class WrongAccountHolderException extends IllegalStateException {
+public class WrongAccountHolderException extends IllegalArgumentException {
 
     /**
      * 
